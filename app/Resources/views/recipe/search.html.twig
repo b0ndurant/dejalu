@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Résultat de la recherche pour
+        <strong>{{ query }}</strong>
+    </h1>
+    {% if recipes %}
+        {% for recipe in recipes %}
+            <div class="col-md-4 text-center pb-3">
+                <div class="card">
+                    <img src={% if recipe.picture %} "{{ asset('uploads/' ~ recipe.picture) }}" {% else %} "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-stock-vector-no-image-available-icon-flat-vector-illustration.jpg?ver=6" {% endif %} class="card-img-top" style="width:100%;height:250px" alt="picture de {{ recipe.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recipe.title }}</h5>
+                        <p class="card-text">{{ recipe.subTitle }}</p>
+                        <a href="{{path('recipe_show',{'id':recipe.id} )}}" class="btn btn-primary float-left">Voir</a>
+                        <a href="{{path('recipe_edit',{'id':recipe.id})}}" class="btn btn-primary float-right">Modifier</a>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+        <p>Désolé aucune recette de ce nom</p>
+    {% endif %}
+
+{% endblock %}

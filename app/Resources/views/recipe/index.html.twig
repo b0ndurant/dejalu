@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center pb-4">Liste des recettes</h1>
+
+    <div class="row">
+        {% for recipe in recipes %}
+            <div class="col-md-4 text-center pb-3">
+                <div class="card">
+                    <img src="{{ asset('uploads/' ~ recipe.picture) }}" class="card-img-top" alt="photo de {{ recipe.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recipe.title }}</h5>
+                        <p class="card-text">{{ recipe.subTitle }}</p>
+                        <a href="{{path('recipe_show',{'id':recipe.id} )}}" class="btn btn-primary float-left">Voir
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                        <a href="{{path('recipe_edit',{'id':recipe.id})}}" class="btn btn-primary float-right">Modifier
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <a href="{{path('recipe_new')}}" class="btn btn-primary">Créer une nouvelle recette
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </a>
+        </div>
+    </div>
+{% endblock %}

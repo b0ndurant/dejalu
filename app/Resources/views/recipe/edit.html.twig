@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        #appbundle_recipe_ingredient5 {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% form_theme edit_form _self %}
+
+{% block body %}
+    <h1 class="text-center pb-4">Modifier la recette</h1>
+
+    {{ form_start(edit_form) }}
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_row(edit_form.title) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_row(edit_form.subTitle) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(edit_form.ingredient1, { 'value' : recipe.ingredient[0] }) }}
+        </div>
+
+        <div class="col-md-3">
+            {{ form_row(edit_form.ingredient2, { 'value' : recipe.ingredient[1] }) }}
+        </div>
+
+        <div class="col-md-3">
+            {{ form_row(edit_form.ingredient3, { 'value' :  recipe.ingredient[2] }) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(edit_form.ingredient4, { 'value' : recipe.ingredient[3] }) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <button type="button" id="add-ingredient" class="btn btn-primary">Ajouter un ingredient</button>
+            </div>
+            {{ form_row(edit_form.ingredient5, { 'value' : recipe.ingredient[4] }) }}
+        </div>
+    </div>
+
+    {% if recipe.picture is not null %}
+        <img alt="photo de {{ recipe.title }}" src="{{ asset('uploads/' ~ recipe.picture) }}" style="height: 200px; width: 40%;">
+    {% endif %}
+    {{ form_row(edit_form.picture) }}
+
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-3 pb-2">
+                {{ form_widget(edit_form) }}
+                <button type="submit" class="btn btn-success"/>Enregistrer les modifications
+                <span class="glyphicon glyphicon-floppy-saved"></span>
+            </button>
+
+            {{ form_end(edit_form) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_start(delete_form) }}
+            <button type="submit" class="btn btn-danger">Supprimer la recette
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+            {{ form_end(delete_form) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href="{{ path('homepage') }}" class="btn btn-primary">Retourner a la liste des recettes</a>
+    </div>
+</div>{% endblock %}{% block javascripts %}
+<script>
+    if ("{{ recipe.ingredient[4] }}") {
+        $('#add-ingredient').css("display", "none");
+        $('#appbundle_recipe_ingredient5').css('display', 'block');
+    }
+
+    $('#add-ingredient').click(function () {
+        $('#appbundle_recipe_ingredient5').css('display', 'block');
+        $('#add-ingredient').css("display", "none");
+    });
+</script>{% endblock %}
