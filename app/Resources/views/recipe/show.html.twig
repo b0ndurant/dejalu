@@ -3,11 +3,15 @@
 {% block body %}
     <header>
         <img src="{% if recipe.picture %} {{ asset('uploads/'~ recipe.picture)}} {% else %} https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-stock-vector-no-image-available-icon-flat-vector-illustration.jpg?ver=6 {% endif %}" alt="photo de {{ recipe.title }}">
-        </header>
+    </header>
 
-
-    <h1 class="text-center pb-4">Recette :
-        {{ recipe.title }}</h1>
+    <div class="row pb-4">
+        <h1 class="text-center">Recette :
+            {{ recipe.title }}</h1>
+        {% if recipe.subtitle %}
+            <h3 class="text-center">{{ recipe.subtitle }}</h3>
+        {% endif %}
+    </div>
     <div class="row">
         <h3>Liste des ingredients :</h3>
         {% for ingredient in recipe.ingredient %}
@@ -21,12 +25,16 @@
     </div>
     <hr>
     <div class="form-group">
-        <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}" class="btn btn-primary">Modifier la recette <span class="glyphicon glyphicon-cog"></span></a>
+        <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}" class="btn btn-primary">Modifier la recette
+            <span class="glyphicon glyphicon-cog"></span>
+        </a>
     </div>
 
     {{ form_start(delete_form) }}
     <div class="form-group">
-        <button type="submit" class="btn btn-danger">supprimer la recette <span class="glyphicon glyphicon-trash"></span></button>
+        <button type="submit" class="btn btn-danger">supprimer la recette
+            <span class="glyphicon glyphicon-trash"></span>
+        </button>
     </div>
     {{ form_end(delete_form) }}
     <div class="form-group">
