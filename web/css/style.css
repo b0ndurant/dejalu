@@ -1,4 +1,5 @@
 /*---- General ----*/
+
 .pb-2 {
   padding-bottom: 2rem;
 }
@@ -10,7 +11,9 @@
 .pb-4 {
   padding-bottom: 4rem;
 }
+
 /*----- Header -----*/
+
 header {
   height: 350px;
 }
@@ -21,6 +24,7 @@ header img {
 }
 
 /*-------- Card -----*/
+
 .card img {
   width: 100%;
   height: 250px;
@@ -31,4 +35,10 @@ header img {
   padding-bottom: 1rem;
   border: 1px solid black;
   border-radius: 25px;
+}
+
+/*-------------- END ----------*/
+
+#appbundle_recipe_ingredient5 {
+  display: none;
 }
